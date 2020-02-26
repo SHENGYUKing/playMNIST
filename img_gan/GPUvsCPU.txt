@@ -1,0 +1,2 @@
+GPU train 10 epochs @ 20 batch size use about 15 mins.
+CPU train 5 epochs @ 20 batch size use about 5 hours.
