@@ -56,11 +56,18 @@
 > 2015年ILSVRC比赛冠军，引入残差(**Residual**<sup>[12]</sup>)概念，修正以往的卷积神经网络结构以适应更深层次的CNN训练。    
 > 1. 引入恒等快捷连接(Identity Shortcut Connection)用于数据直接跨层处理，有效地在进一步加深网络的同时抑制了梯度消失和梯度爆炸，进一步提升了深度神经网络的性能。    
 > 2. 利用残差模块将训练目标由H(x)转化为H(x)=F(x)+x中的F(x)，在不影响训练最终效果的基础上简化了训练难度，即将一个问题分解为多个尺度直接的残差问题从而起到优化训练的效果。    
+---
+### VII. **GAN**<sup>[13]</sup>  & **CGAN**<sup>[14]</sup>    
+> 生成式对抗网络(**GAN**, **Generative Adversarial Networks**)是一种深度学习模型，是近年来最具前景的无监督学习方法之一。
+> 1. GAN的任务有别于传统分类和识别，其主要能力是生成。    
+> 2. GAN的主要结构包含两个模块，一个是判别模块(Generative Module)和生成模块(Generative Module)，从而可以根据已知训练集样本生成以假乱真的伪样本。    
+> 3. 在GAN的基础之上衍生出了条件生成式对抗网络(**CGAN**, **Conditional Generative Adversarial Networks**)，从而满足生成特定要求的样本数据。
+> 4. GAN和CGAN的出现一方面可以为生成式的任务提供全新的方法，另一方面也给训练集样本数量较少难以训练的项目提供了扩展训练样本的机会。
 
 ## 文件结构
 ```
-|-- playMNIST
-    |-- mnist
+|-- MNIST
+    |-- mnist    // save the original dataset
     |   |-- t10k-images.idx3-ubyte
     |   |-- t10k-labels.idx1-ubyte
     |   |-- train-images.idx3-ubyte
@@ -70,36 +77,26 @@
     |       |-- t10k-labels-idx1-ubyte.gz
     |       |-- train-images-idx3-ubyte.gz
     |       |-- train-labels-idx1-ubyte.gz
-    |-- gan_discriminator.pth
-    |-- gan_generator.pth
-    |-- maker.py
+    |-- mnist_fake    // save the fake dataset by CGAN
+    |   |-- fake_mnist.csv
+    |-- maker.py    // CGAN
     |-- model.ckpt
-    |-- model.py
+    |-- model.py    // Load MNIST
     |-- README.md
-    |-- train.py
+    |-- train.py    // LeNet, AlexNet, ResNet...
     |-- img_gan
     |   |-- GPUvsCPU.txt
     |   |-- fake
-    |   |   |-- fake_imgs_1.png
-    |   |   |-- fake_imgs_2.png
-    |   |   |-- fake_imgs_3.png
-    |   |   |-- fake_imgs_4.png
-    |   |   |-- fake_imgs_5.png
+    |   |   |-- byCPU
     |   |   |-- byGPU
-    |   |       |-- fake_imgs_1.png
-    |   |       |-- fake_imgs_2.png
-    |   |       |-- fake_imgs_3.png
-    |   |       |-- fake_imgs_4.png
-    |   |       |-- fake_imgs_5.png
-    |   |       |-- fake_imgs_6.png
-    |   |       |-- fake_imgs_7.png
-    |   |       |-- fake_imgs_8.png
-    |   |       |-- fake_imgs_9.png
-    |   |       |-- fake_imgs_10.png
     |   |-- real
-    |       |-- real_imgs.png
-    |       |-- byGPU
-    |           |-- real_imgs.png
+    |   |   |-- byCPU
+    |   |   |-- byGPU
+    |-- model
+    |   |-- cgan_discriminator_1E10.pth
+    |   |-- cgan_generator_1E10.pth
+    |   |-- cgan_discriminator_2E05.pth
+    |   |-- cgan_generator_2E05.pth
 ```
 
 ## 相关文献与资料
@@ -114,4 +111,6 @@
 > [9][Simonyan, Karen, Zisserman, Andrew. Very Deep Convolutional Networks for Large-Scale Image Recognition[J]. Computer Science, 2014.](http://arxiv.org/abs/1409.1556)    
 > [10][Szegedy C , Liu W , Jia Y , et al. Going Deeper with Convolutions[J]. 2014.](http://arxiv.org/abs/1409.4842)    
 > [11][He K , Zhang X , Ren S , et al. Deep Residual Learning for Image Recognition[C]// 2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR). IEEE Computer Society, 2016.](http://arxiv.org/pdf/1512.03385)    
-> [12][Residual[EB/OL]. https://en.wikipedia.org/wiki/Residual](https://en.wikipedia.org/wiki/Residual)
+> [12][Residual[EB/OL]. https://en.wikipedia.org/wiki/Residual](https://en.wikipedia.org/wiki/Residual)    
+> [13][Goodfellow I J , Pouget-Abadie J , Mirza M , et al. Generative Adversarial Networks[J]. Advances in Neural Information Processing Systems, 2014, 3:2672-2680.](https://arxiv.org/abs/1406.2661)    
+> [14][Mehdi Mirza, Simon Osindero. Conditional Generative Adversarial Nets[J]. 2014.](https://arxiv.org/pdf/1411.1784.pdf)
