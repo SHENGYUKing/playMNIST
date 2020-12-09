@@ -269,7 +269,6 @@ def train():
             G_loss.backward()
             G_optimizer.step()
 
-            """假的数据跟标签对应不上，而且假数据一致性出奇的高都TM是3.。。。"""
             # GAN jepg to mnist_fake on CPU
             if (i + 1) % 1000 == 0:
                 real_images = to_img(real_img.data)
