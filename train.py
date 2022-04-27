@@ -286,23 +286,23 @@ class BarrBlock(nn.Module):
         super(BarrBlock, self).__init__()
 
         self.conv1 = nn.Sequential(
-            nn.Conv2d(in_planes, out_planes, kernel_size=1, bias=False),
+            nn.Conv2d(in_planes, out_planes, kernel_size=1, stride=1, padding=0, bias=False),
             nn.BatchNorm2d(out_planes),
             nn.ReLU()
         )
         self.conv2 = nn.Sequential(
-            nn.Conv2d(out_planes, out_planes, kernel_size=3, bias=False),
+            nn.Conv2d(out_planes, out_planes, kernel_size=3, stride=stride, padding=1, bias=False),
             nn.BatchNorm2d(out_planes),
             nn.ReLU()
         )
         self.conv3 = nn.Sequential(
-            nn.Conv2d(out_planes, self.expansion * out_planes, kernel_size=1, bias=False),
+            nn.Conv2d(out_planes, self.expansion * out_planes, kernel_size=1, stride=1, padding=0, bias=False),
             nn.BatchNorm2d(self.expansion * out_planes)
         )
         self.shortcut = nn.Sequential()
         if stride != 1 or in_planes != self.expansion * out_planes:
             self.shortcut = nn.Sequential(
-                nn.Conv2d(in_planes, self.expansion * out_planes, kernel_size=1, bias=False),
+                nn.Conv2d(in_planes, self.expansion * out_planes, kernel_size=1, stride=stride, padding=0, bias=False),
                 nn.BatchNorm2d(self.expansion * out_planes)
             )
 
